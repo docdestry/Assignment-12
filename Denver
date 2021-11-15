@@ -1,0 +1,18 @@
+links <- read.csv("C:\\Users\\Miccina\\Desktop\\Data files\\Dataset1-Media-Example-EDGES.csv", header=T, as.is=T)
+nodes <- read.csv("C:\\Users\\Miccina\\Desktop\\Data files\\Dataset1-Media-Example-NODES.csv", header=T, as.is=T)
+head(nodes)
+head(links)
+net <- graph_from_data_frame(d=links, vertices=nodes, directed=T) 
+net
+E(net)
+V(net)[media=="BBC"]
+E(net)$type
+V(net)$media
+net[5,7]
+plot(net)
+net <- simplify(net, remove.multiple = F, remove.loops = T)
+E(net)$width <- E(net)$weight/6
+plot(net, vertex.shape="none", vertex.label=V(net)$media, 
+     vertex.label.font=2, vertex.label.color="gray40",
+     vertex.label.cex=.6, edge.color="grey", edge.arrow.size=.3, main=Mentions/Hyperlinks)
+main="Media Mentions and Hyperlinks"
